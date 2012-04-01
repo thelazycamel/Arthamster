@@ -49,8 +49,12 @@
         });
         return false;
       });
-      return $(".image").click(function(e) {
+      $(".image").click(function(e) {
         _this.background_image(e.target.dataset.src);
+        return false;
+      });
+      return $("#clear").click(function() {
+        _this.clear();
         return false;
       });
     };
@@ -64,7 +68,6 @@
     };
 
     Arthamster.prototype.square = function(e) {
-      console.log(this.tool);
       this.context.fillStyle = this.color;
       return this.context.fillRect(this.x(e) - (this.tool_size / 2), this.y(e) - (this.tool_size / 2), this.tool_size, this.tool_size);
     };
@@ -87,6 +90,12 @@
         this.context.lineTo(this.x(e) + 1, this.y(e) + 1);
         return this.context.stroke();
       }
+    };
+
+    Arthamster.prototype.clear = function() {
+      console.log(this.jcanvas.width());
+      this.context.fillStyle = "#ffffff";
+      return this.context.fillRect(0, 0, this.jcanvas.width(), this.jcanvas.height());
     };
 
     Arthamster.prototype.background_image = function(image) {

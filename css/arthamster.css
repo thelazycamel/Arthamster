@@ -10,7 +10,6 @@ body {
 #palette{
   float: left;
   width: 72px;
-  height: 300px;
   margin-right: 2px;
 }
 
@@ -30,7 +29,7 @@ body {
   width: 11px;
   height: 11px;
   border: 1px solid #000000;
-  background-color: #ffffff;
+  background-color: #000000;
 }
 
 #palette a{

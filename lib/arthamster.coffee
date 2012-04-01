@@ -36,6 +36,9 @@ class Arthamster
     $(".image").click (e) =>
       @background_image(e.target.dataset.src)
       return false
+    $("#clear").click =>
+      @clear()
+      return false
 
   x: (e) ->
     e.pageX - @canvas.offsetLeft 
@@ -44,7 +47,6 @@ class Arthamster
     e.pageY - @canvas.offsetTop
 
   square: (e) ->
-    console.log(@tool)
     @context.fillStyle = @color
     @context.fillRect(@x(e) - (@tool_size / 2), @y(e) - (@tool_size / 2), @tool_size, @tool_size)
 
@@ -64,6 +66,11 @@ class Arthamster
       @context.moveTo(@x(e), @y(e));
       @context.lineTo(@x(e) + 1, @y(e) + 1);
       @context.stroke();
+
+  clear: ->
+    console.log(@jcanvas.width())
+    @context.fillStyle = "#ffffff"
+    @context.fillRect(0, 0, @jcanvas.width(), @jcanvas.height())
 
   background_image: (image) ->
     img = new Image()
