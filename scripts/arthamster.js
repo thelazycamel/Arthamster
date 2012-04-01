@@ -105,7 +105,6 @@
     };
 
     Arthamster.prototype.clear = function() {
-      console.log(this.jcanvas.width());
       this.context.fillStyle = "#ffffff";
       return this.context.fillRect(0, 0, this.jcanvas.width(), this.jcanvas.height());
     };

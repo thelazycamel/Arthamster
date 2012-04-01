@@ -78,7 +78,6 @@ class Arthamster
     @context.fillText(@text, @x(e), @y(e))
 
   clear: ->
-    console.log(@jcanvas.width())
     @context.fillStyle = "#ffffff"
     @context.fillRect(0, 0, @jcanvas.width(), @jcanvas.height())
 
