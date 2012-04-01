@@ -75,13 +75,13 @@
     Arthamster.prototype.circle = function(e) {
       this.context.fillStyle = this.color;
       this.context.beginPath();
-      this.context.arc(this.x(e), this.y(e), this.tool_size, 0, Math.PI * 2, true);
+      this.context.arc(this.x(e), this.y(e), this.tool_size / 2, 0, Math.PI * 2, true);
       this.context.closePath();
       return this.context.fill();
     };
 
     Arthamster.prototype.pen = function(e) {
-      if (this.draw === true && (this.tool = "pen")) {
+      if (this.draw === true && this.tool === "pen") {
         this.context.lineWidth = this.tool_size;
         this.context.lineCap = "round";
         this.context.beginPath();

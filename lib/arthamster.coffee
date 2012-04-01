@@ -50,12 +50,12 @@ class Arthamster
   circle: (e) ->
     @context.fillStyle= @color;
     @context.beginPath();
-    @context.arc(@x(e), @y(e), @tool_size, 0, Math.PI*2, true);
+    @context.arc(@x(e), @y(e), @tool_size / 2, 0, Math.PI*2, true);
     @context.closePath();
     @context.fill();
 
   pen: (e) ->
-    if @draw == true && @tool = "pen"
+    if @draw == true && @tool == "pen"
       @context.lineWidth = @tool_size;
       @context.lineCap = "round";
       @context.beginPath();
