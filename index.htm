@@ -8,19 +8,17 @@
   </head>
   <body>
     <h1>Arthamster HTML 5 Canvas</h1>
+    <div id="palette">
+      <h3>Color:<span id="current_color"></span></h3>
+      <div id="colors">
+      </div>
+    </div>
     <canvas id="example" width="700px" height="453px"></canvas>
     <br/>
     <a id="circle" href="#" class="tool">Circle</a> |
     <a id="square" href="#" class="tool">Square</a> | 
     <a id="pen" href="#" class="tool">Pen</a>
     <input type="range"  min="1" max="100" id="tool_size" value="10"/>
-    <br/>
-    <a id="red" href="#" class="color">Red</a> |
-    <a id="black" href="#" class="color">Black</a> |
-    <a id="blue" href="#" class="color">Blue</a> |
-    <a id="green" href="#" class="color">Green</a> |
-    <a id="yellow" href="#" class="color">Yellow</a> |
-    <a id="white" href="#" class="color">White</a>
     <br/>
     <a id="mountains" href="#" data-src="images/mountains.jpg" class="image">Mountain Background</a>
   </body>

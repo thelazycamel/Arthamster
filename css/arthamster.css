@@ -6,3 +6,39 @@ body {
   background-color: #ffffff;
   border: 1px solid black;
 }
+
+#palette{
+  float: left;
+  width: 72px;
+  height: 300px;
+  margin-right: 2px;
+}
+
+#palette h3 {
+  position: relative;
+  background-color: #dddddd;
+  padding: 5px;
+  margin :0px;
+  font: normal 12px helvetica, arial, sans-serif;
+}
+
+#current_color {
+  display: block;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 11px;
+  height: 11px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+}
+
+#palette a{
+  text-decoration: none;
+  display: inline-block;
+  float: left;
+  margin-left: 2px;
+  margin-bottom: 2px;
+  width: 10px;
+  height: 10px;
+}
