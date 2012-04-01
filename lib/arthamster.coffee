@@ -72,12 +72,10 @@ class Arthamster
       @context.stroke();
 
   text_tool: (e) ->
-    console.log(@text)
     @context.fillStyle    = @color
     @context.font         = "normal #{@tool_size}px sans-serif"
     @context.textBaseline = "top"
     @context.fillText(@text, @x(e), @y(e))
-    #@context.strokeText(@text, @x, @y)
 
   clear: ->
     console.log(@jcanvas.width())

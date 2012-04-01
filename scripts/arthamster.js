@@ -98,7 +98,6 @@
     };
 
     Arthamster.prototype.text_tool = function(e) {
-      console.log(this.text);
       this.context.fillStyle = this.color;
       this.context.font = "normal " + this.tool_size + "px sans-serif";
       this.context.textBaseline = "top";
