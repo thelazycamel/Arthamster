@@ -13,10 +13,12 @@
       this.tool = "pen";
       this.color = "black";
       this.tool_size = 10;
+      this.text = "";
       this.jcanvas.mousedown(function(e) {
         if (_this.tool === "pen") _this.draw = true;
         if (_this.tool === "square") _this.square(e);
-        if (_this.tool === "circle") return _this.circle(e);
+        if (_this.tool === "circle") _this.circle(e);
+        if (_this.tool === "text") return _this.text_tool(e);
       });
       this.jcanvas.mouseup(function() {
         return _this.draw = false;
@@ -53,9 +55,12 @@
         _this.background_image(e.target.dataset.src);
         return false;
       });
-      return $("#clear").click(function() {
+      $("#clear").click(function() {
         _this.clear();
         return false;
+      });
+      return $("#text_value").change(function() {
+        return _this.text = $("#text_value").val();
       });
     };
 
@@ -90,6 +95,14 @@
         this.context.lineTo(this.x(e) + 1, this.y(e) + 1);
         return this.context.stroke();
       }
+    };
+
+    Arthamster.prototype.text_tool = function(e) {
+      console.log(this.text);
+      this.context.fillStyle = this.color;
+      this.context.font = "normal " + this.tool_size + "px sans-serif";
+      this.context.textBaseline = "top";
+      return this.context.fillText(this.text, this.x(e), this.y(e));
     };
 
     Arthamster.prototype.clear = function() {

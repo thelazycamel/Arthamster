@@ -11,10 +11,12 @@ class Arthamster
     @tool = "pen"
     @color = "black"
     @tool_size = 10
+    @text = ""
     @jcanvas.mousedown (e) => 
       @draw = true if @tool == "pen"
       @square(e) if @tool == "square"
       @circle(e) if @tool == "circle"
+      @text_tool(e) if @tool == "text"
     @jcanvas.mouseup =>
       @draw = false
     @jcanvas.mousemove (e) => 
@@ -39,6 +41,8 @@ class Arthamster
     $("#clear").click =>
       @clear()
       return false
+    $("#text_value").change =>
+      @text = $("#text_value").val()
 
   x: (e) ->
     e.pageX - @canvas.offsetLeft 
@@ -66,6 +70,14 @@ class Arthamster
       @context.moveTo(@x(e), @y(e));
       @context.lineTo(@x(e) + 1, @y(e) + 1);
       @context.stroke();
+
+  text_tool: (e) ->
+    console.log(@text)
+    @context.fillStyle    = @color
+    @context.font         = "normal #{@tool_size}px sans-serif"
+    @context.textBaseline = "top"
+    @context.fillText(@text, @x(e), @y(e))
+    #@context.strokeText(@text, @x, @y)
 
   clear: ->
     console.log(@jcanvas.width())
