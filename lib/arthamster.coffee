@@ -10,17 +10,20 @@ class Arthamster
     @draw = false
     @tool = "pen"
     @color = "black"
+    @tool_size = 10
     @jcanvas.mousedown (e) => 
       @draw = true if @tool == "pen"
-      @rectangle(e, 20, 20) if @tool == "rectangle"
-      @circle(e, 20) if @tool == "circle"
+      @square(e) if @tool == "square"
+      @circle(e) if @tool == "circle"
     @jcanvas.mouseup =>
       @draw = false
     @jcanvas.mousemove (e) => 
       @pen(e)
-    @set_up_pallet()
+    @set_up_toolkit()
 
-  set_up_pallet: ->
+  set_up_toolkit: ->
+    $("#tool_size").change (e) =>
+      @tool_size = e.target.value
     $(".tool").click (e) =>
       $(".tool").css({"color": "grey"})
       $("##{@tool}").css({"color": "#{@color}"})
@@ -33,26 +36,32 @@ class Arthamster
     $(".image").click (e) =>
       @background_image(e.target.dataset.src)
 
-  rectangle: (e, width, height) ->
+  x: (e) ->
+    e.pageX - @canvas.offsetLeft 
+    
+  y: (e) ->
+    e.pageY - @canvas.offsetTop
+
+  square: (e) ->
     console.log(@tool)
     @context.fillStyle = @color
-    @context.fillRect(e.pageX, e.pageY, width, height)
+    @context.fillRect(@x(e) - (@tool_size / 2), @y(e) - (@tool_size / 2), @tool_size, @tool_size)
 
-  circle: (e, radius) ->
+  circle: (e) ->
     @context.fillStyle= @color;
     @context.beginPath();
-    @context.arc(e.pageX,e.pageY,radius,0,Math.PI*2,true);
+    @context.arc(@x(e), @y(e), @tool_size, 0, Math.PI*2, true);
     @context.closePath();
     @context.fill();
 
   pen: (e) ->
     if @draw == true && @tool = "pen"
-      @context.lineWidth = 5;
+      @context.lineWidth = @tool_size;
       @context.lineCap = "round";
       @context.beginPath();
       @context.strokeStyle = @color
-      @context.moveTo(e.pageX,e.pageY);
-      @context.lineTo(e.pageX+1,e.pageY+1);
+      @context.moveTo(@x(e), @y(e));
+      @context.lineTo(@x(e) + 1, @y(e) + 1);
       @context.stroke();
 
   background_image: (image) ->

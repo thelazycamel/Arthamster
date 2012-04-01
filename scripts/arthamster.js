@@ -12,10 +12,11 @@
       this.draw = false;
       this.tool = "pen";
       this.color = "black";
+      this.tool_size = 10;
       this.jcanvas.mousedown(function(e) {
         if (_this.tool === "pen") _this.draw = true;
-        if (_this.tool === "rectangle") _this.rectangle(e, 20, 20);
-        if (_this.tool === "circle") return _this.circle(e, 20);
+        if (_this.tool === "square") _this.square(e);
+        if (_this.tool === "circle") return _this.circle(e);
       });
       this.jcanvas.mouseup(function() {
         return _this.draw = false;
@@ -23,11 +24,14 @@
       this.jcanvas.mousemove(function(e) {
         return _this.pen(e);
       });
-      this.set_up_pallet();
+      this.set_up_toolkit();
     }
 
-    Arthamster.prototype.set_up_pallet = function() {
+    Arthamster.prototype.set_up_toolkit = function() {
       var _this = this;
+      $("#tool_size").change(function(e) {
+        return _this.tool_size = e.target.value;
+      });
       $(".tool").click(function(e) {
         $(".tool").css({
           "color": "grey"
@@ -54,28 +58,36 @@
       });
     };
 
-    Arthamster.prototype.rectangle = function(e, width, height) {
-      console.log(this.tool);
-      this.context.fillStyle = this.color;
-      return this.context.fillRect(e.pageX, e.pageY, width, height);
+    Arthamster.prototype.x = function(e) {
+      return e.pageX - this.canvas.offsetLeft;
     };
 
-    Arthamster.prototype.circle = function(e, radius) {
+    Arthamster.prototype.y = function(e) {
+      return e.pageY - this.canvas.offsetTop;
+    };
+
+    Arthamster.prototype.square = function(e) {
+      console.log(this.tool);
+      this.context.fillStyle = this.color;
+      return this.context.fillRect(this.x(e) - (this.tool_size / 2), this.y(e) - (this.tool_size / 2), this.tool_size, this.tool_size);
+    };
+
+    Arthamster.prototype.circle = function(e) {
       this.context.fillStyle = this.color;
       this.context.beginPath();
-      this.context.arc(e.pageX, e.pageY, radius, 0, Math.PI * 2, true);
+      this.context.arc(this.x(e), this.y(e), this.tool_size, 0, Math.PI * 2, true);
       this.context.closePath();
       return this.context.fill();
     };
 
     Arthamster.prototype.pen = function(e) {
       if (this.draw === true && (this.tool = "pen")) {
-        this.context.lineWidth = 5;
+        this.context.lineWidth = this.tool_size;
         this.context.lineCap = "round";
         this.context.beginPath();
         this.context.strokeStyle = this.color;
-        this.context.moveTo(e.pageX, e.pageY);
-        this.context.lineTo(e.pageX + 1, e.pageY + 1);
+        this.context.moveTo(this.x(e), this.y(e));
+        this.context.lineTo(this.x(e) + 1, this.y(e) + 1);
         return this.context.stroke();
       }
     };
