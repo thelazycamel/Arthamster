@@ -34,13 +34,15 @@ class Arthamster
       $(".tool").removeClass("selected_tool")
       $("##{@tool}").addClass("selected_tool")
       return false
-    $("#palette a.color").click (e) =>
+    $("#palette").on "click", "a.color", (e) =>
       @color = "##{e.target.id}"
       $("#current_color").css({"backgroundColor": @color})
       return false
     $(".image").click (e) =>
       @background_image(e.target.dataset.src)
       return false
+    $("#pallet_changer").change (e) =>
+      new_palette = new Palette(eval(e.target.value))
     $("#clear").click =>
       @clear()
       return false

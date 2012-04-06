@@ -3,7 +3,7 @@ body {
 }
 
 #arthamster {
-  width: 805px;
+  width: 807px;
   background-color: #cccccc;
   font: normal 12px helvetica, arial, sans-serif;
 }
@@ -23,9 +23,9 @@ body {
 }
 
 #palette{
-  float: left;
+  float: right;
   width: 72px;
-  margin-right: 2px;
+  padding: 0px 2px;
 }
 
 #palette h3 {
@@ -57,11 +57,18 @@ body {
   height: 10px;
 }
 
+#arthamster #clear {
+  text-decoration: none;
+  color: #aaaaaa;
+  background-color: #ffffff;
+  border: 1px solid #aaaaaa;
+  padding: 2px 5px;
+}
+
 #toolbox{
-  float: right;
+  float: left;
   width: 25px;
-  padding-top: 2px;
-  padding-right :2px;
+  padding: 0px 2px;
 }
 
 #toolbox .tool {

@@ -1,4 +1,4 @@
-web_216 = [ "FFFFFF",
+pallet_web_216 = [ "FFFFFF",
             "FFFFCC",
             "FFFF99",
             "FFFF66",
