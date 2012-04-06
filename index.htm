@@ -7,23 +7,24 @@
     <script type="text/javascript" src="scripts/arthamster.js"></script>
   </head>
   <body>
-    <h1>Arthamster HTML 5 Canvas</h1>
-    <div id="palette">
-      <h3>Color:<span id="current_color"></span></h3>
-      <div id="colors">
+    <div id="arthamster">
+      <h1>Arthamster HTML 5 Canvas</h1>
+      <div id="toolbox">
+        <a id="pencil" href="#" class="tool"></a>
+        <a id="circle" href="#" class="tool"></a>
+        <a id="square" href="#" class="tool"></a>
+        <a id="text" href="#" class="tool"></a>
       </div>
+      <div id="palette">
+        <h3>Color:<span id="current_color"></span></h3>
+        <div id="colors">
+        </div>
+      </div>
+      <canvas id="example" width="700px" height="453px"></canvas>
+      <label>Text: </label><input type="text" id="text_value"/> 
+      <input type="range" min="1" max="100" id="tool_size" value="10"/>
+      <a id="mountains" href="#" data-src="images/mountains.jpg" class="image">Mountain Background</a>
+      <a id="clear" href="#">Clear</a>
     </div>
-    <canvas id="example" width="700px" height="453px"></canvas>
-    <br/>
-    <a id="circle" href="#" class="tool">Circle</a> |
-    <a id="square" href="#" class="tool">Square</a> | 
-    <a id="pen" href="#" class="tool">Pen</a> |
-    <a id="text" href="#" class="tool">Text</a>
-    <input type="text" id="text_value"/> | 
-    <input type="range" min="1" max="100" id="tool_size" value="10"/>
-    <br/>
-    <a id="mountains" href="#" data-src="images/mountains.jpg" class="image">Mountain Background</a>
-    <a id="clear" href="#">Clear</a>
-
   </body>
 </html>

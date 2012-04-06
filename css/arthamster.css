@@ -2,9 +2,24 @@ body {
   background-color: #eeeeee;
 }
 
+#arthamster {
+  width: 805px;
+  background-color: #cccccc;
+  font: normal 12px helvetica, arial, sans-serif;
+}
+
+#arthamster h1 {
+  background-color: #cccccc;
+  color: ffffff;
+  padding: 5px;
+  margin: 0px;
+  font: bold 13px helvetica, arial, sans-serif;
+}
+
 #example{
   background-color: #ffffff;
   border: 1px solid black;
+  margin: 0px;
 }
 
 #palette{
@@ -15,7 +30,7 @@ body {
 
 #palette h3 {
   position: relative;
-  background-color: #dddddd;
+  background-color: #cccccc;
   padding: 5px;
   margin :0px;
   font: normal 12px helvetica, arial, sans-serif;
@@ -41,3 +56,52 @@ body {
   width: 10px;
   height: 10px;
 }
+
+#toolbox{
+  float: right;
+  width: 25px;
+  padding-top: 2px;
+  padding-right :2px;
+}
+
+#toolbox .tool {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-image: url("../images/icons.png");
+}
+
+#pencil {
+  background-position: -10px 0px;
+}
+
+#pencil.selected_tool {
+  background-position: -50px 0px;
+}
+
+#square {
+  background-position: -10px -50px;
+}
+
+#square.selected_tool {
+  background-position: -50px -50px;
+}
+
+#circle {
+  background-position: -10px -100px;
+}
+
+#circle.selected_tool {
+  background-position: -50px -100px;
+}
+
+#text {
+  background-position: -10px -150px;
+}
+
+#text.selected_tool {
+  background-position: -50px -150px;
+}
+
+
+
