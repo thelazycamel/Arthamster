@@ -5,6 +5,7 @@ class Arthamster
     @canvas = document.getElementById(canvas_id)
     @jcanvas = $("##{canvas_id}")
     @context = @canvas.getContext('2d')
+    @restore_points = []
     @draw = false
     @tool = "pencil"
     @color = "black"
@@ -19,6 +20,7 @@ class Arthamster
       @square(e) if @tool == "square"
       @circle(e) if @tool == "circle"
       @text_tool(e) if @tool == "text"
+      @set_restore_point()
     @jcanvas.mouseup =>
       @draw = false
     @jcanvas.mousemove (e) => 
@@ -38,13 +40,18 @@ class Arthamster
       @color = "##{e.target.id}"
       $("#current_color").css({"backgroundColor": @color})
       return false
-    $(".image").click (e) =>
-      @background_image(e.target.dataset.src)
+    $("#image").click (e) =>
+      @image(e.target.dataset.src)
       return false
     $("#pallet_changer").change (e) =>
       new_palette = new Palette(eval(e.target.value))
     $("#clear").click =>
       @clear()
+      return false
+    $("#undo").click =>
+      unless @restore_points.length == 0
+        @clear() 
+        @image(@restore_points.pop())
       return false
     $("#text_value").change =>
       @text = $("#text_value").val()
@@ -54,6 +61,11 @@ class Arthamster
     
   y: (e) ->
     e.pageY - @canvas.offsetTop
+
+  set_restore_point: ->
+    @restore_points.push(@canvas.toDataURL("image/png"))
+    if @restore_points.length > 4
+      @restore_points.splice(0,1)
 
   square: (e) ->
     @context.fillStyle = @color
@@ -86,9 +98,10 @@ class Arthamster
     @context.fillStyle = "#ffffff"
     @context.fillRect(0, 0, @jcanvas.width(), @jcanvas.height())
 
-  background_image: (image) ->
+  image: (url) ->
     img = new Image()
-    img.src = image
-    img.onload = @context.drawImage(img,0,0)
+    img.src = url
+    img.onload = =>
+      @context.drawImage(img,0,0)
 
       

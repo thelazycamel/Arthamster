@@ -8,6 +8,7 @@
       this.canvas = document.getElementById(canvas_id);
       this.jcanvas = $("#" + canvas_id);
       this.context = this.canvas.getContext('2d');
+      this.restore_points = [];
       this.draw = false;
       this.tool = "pencil";
       this.color = "black";
@@ -23,7 +24,8 @@
         if (_this.tool === "pencil") _this.draw = true;
         if (_this.tool === "square") _this.square(e);
         if (_this.tool === "circle") _this.circle(e);
-        if (_this.tool === "text") return _this.text_tool(e);
+        if (_this.tool === "text") _this.text_tool(e);
+        return _this.set_restore_point();
       });
       this.jcanvas.mouseup(function() {
         return _this.draw = false;
@@ -52,8 +54,8 @@
         });
         return false;
       });
-      $(".image").click(function(e) {
-        _this.background_image(e.target.dataset.src);
+      $("#image").click(function(e) {
+        _this.image(e.target.dataset.src);
         return false;
       });
       $("#pallet_changer").change(function(e) {
@@ -62,6 +64,13 @@
       });
       $("#clear").click(function() {
         _this.clear();
+        return false;
+      });
+      $("#undo").click(function() {
+        if (_this.restore_points.length !== 0) {
+          _this.clear();
+          _this.image(_this.restore_points.pop());
+        }
         return false;
       });
       return $("#text_value").change(function() {
@@ -75,6 +84,11 @@
 
     Arthamster.prototype.y = function(e) {
       return e.pageY - this.canvas.offsetTop;
+    };
+
+    Arthamster.prototype.set_restore_point = function() {
+      this.restore_points.push(this.canvas.toDataURL("image/png"));
+      if (this.restore_points.length > 4) return this.restore_points.splice(0, 1);
     };
 
     Arthamster.prototype.square = function(e) {
@@ -114,11 +128,14 @@
       return this.context.fillRect(0, 0, this.jcanvas.width(), this.jcanvas.height());
     };
 
-    Arthamster.prototype.background_image = function(image) {
-      var img;
+    Arthamster.prototype.image = function(url) {
+      var img,
+        _this = this;
       img = new Image();
-      img.src = image;
-      return img.onload = this.context.drawImage(img, 0, 0);
+      img.src = url;
+      return img.onload = function() {
+        return _this.context.drawImage(img, 0, 0);
+      };
     };
 
     return Arthamster;

@@ -57,12 +57,13 @@ body {
   height: 10px;
 }
 
-#arthamster #clear {
+#arthamster .button {
   text-decoration: none;
   color: #aaaaaa;
   background-color: #ffffff;
   border: 1px solid #aaaaaa;
   padding: 2px 5px;
+  margin-left: 3px;
 }
 
 #toolbox{
