@@ -20,8 +20,6 @@ class Arthamster
   set_dimensions: (width, height) ->
     @canvas_width = width
     @canvas_height = height
-    console.log("#{width}, #{height}")
-    console.log(typeof width)
     @jcanvas.attr("width", "#{width}px")
     @jcanvas.attr("height","#{height}px")
     $("#arthamster").css({"width": "#{parseInt(width) + 107}px"})
