@@ -7,19 +7,25 @@
       this.canvas_id = canvas_id;
       this.canvas = document.getElementById(canvas_id);
       this.jcanvas = $("#" + canvas_id);
+      this.canvas_width = width;
+      this.canvas_height = height;
       this.context = this.canvas.getContext('2d');
       this.restore_points = [];
       this.draw = false;
       this.tool = "pencil";
+      $("#pencil").addClass("selected_tool");
       this.color = "black";
       this.tool_size = 10;
       this.text = "";
       this.set_dimensions(width, height);
-      this.mouse_events();
-      this.set_up_toolkit();
+      this.event_listeners();
     }
 
     Arthamster.prototype.set_dimensions = function(width, height) {
+      this.canvas_width = width;
+      this.canvas_height = height;
+      console.log("" + width + ", " + height);
+      console.log(typeof width);
       this.jcanvas.attr("width", "" + width + "px");
       this.jcanvas.attr("height", "" + height + "px");
       $("#arthamster").css({
@@ -29,7 +35,7 @@
       return $("#arthamster input#height").val(height);
     };
 
-    Arthamster.prototype.mouse_events = function() {
+    Arthamster.prototype.event_listeners = function() {
       var _this = this;
       this.jcanvas.mousedown(function(e) {
         if (_this.tool === "pencil") _this.draw = true;
@@ -41,14 +47,9 @@
       this.jcanvas.mouseup(function() {
         return _this.draw = false;
       });
-      return this.jcanvas.mousemove(function(e) {
+      this.jcanvas.mousemove(function(e) {
         return _this.pencil(e);
       });
-    };
-
-    Arthamster.prototype.set_up_toolkit = function() {
-      var _this = this;
-      $("#pencil").addClass("selected_tool");
       $("#tool_size").change(function(e) {
         return _this.tool_size = e.target.value;
       });
@@ -142,15 +143,25 @@
 
     Arthamster.prototype.clear = function() {
       this.context.fillStyle = "#ffffff";
-      return this.context.fillRect(0, 0, this.jcanvas.width(), this.jcanvas.height());
+      return this.context.fillRect(0, 0, this.canvas_width, this.canvas_height);
     };
 
     Arthamster.prototype.image = function(url) {
-      var img,
+      var img, img_height, img_width,
         _this = this;
       img = new Image();
       img.src = url;
-      this.set_dimensions(img.width, img.height);
+      if ((img.width != null) && img.width !== 0) {
+        img_width = img.width;
+      } else {
+        img_width = this.canvas_width;
+      }
+      if ((img.height != null) && img.height !== 0) {
+        img_height = img.height;
+      } else {
+        img_height = this.canvas_height;
+      }
+      this.set_dimensions(img_width, img_height);
       return img.onload = function() {
         return _this.context.drawImage(img, 0, 0);
       };

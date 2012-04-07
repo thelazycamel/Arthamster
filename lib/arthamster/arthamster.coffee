@@ -4,18 +4,24 @@ class Arthamster
     @canvas_id = canvas_id
     @canvas = document.getElementById(canvas_id)
     @jcanvas = $("##{canvas_id}")
+    @canvas_width = width
+    @canvas_height = height
     @context = @canvas.getContext('2d')
     @restore_points = []
     @draw = false
     @tool = "pencil"
+    $("#pencil").addClass("selected_tool")
     @color = "black"
     @tool_size = 10
     @text = ""
     @set_dimensions(width, height)
-    @mouse_events()
-    @set_up_toolkit()
+    @event_listeners()
 
   set_dimensions: (width, height) ->
+    @canvas_width = width
+    @canvas_height = height
+    console.log("#{width}, #{height}")
+    console.log(typeof width)
     @jcanvas.attr("width", "#{width}px")
     @jcanvas.attr("height","#{height}px")
     $("#arthamster").css({"width": "#{parseInt(width) + 107}px"})
@@ -23,7 +29,8 @@ class Arthamster
     $("#arthamster input#height").val(height)
 
 
-  mouse_events: ->
+  event_listeners: ->
+    #set up the jquery click events for the toolkit
     @jcanvas.mousedown (e) => 
       @draw = true if @tool == "pencil"
       @square(e) if @tool == "square"
@@ -34,10 +41,6 @@ class Arthamster
       @draw = false
     @jcanvas.mousemove (e) => 
       @pencil(e)
-
-  set_up_toolkit: ->
-    #set up the jquery click events for the toolkit
-    $("#pencil").addClass("selected_tool")
     $("#tool_size").change (e) =>
       @tool_size = e.target.value
     $(".tool").click (e) =>
@@ -109,12 +112,20 @@ class Arthamster
 
   clear: ->
     @context.fillStyle = "#ffffff"
-    @context.fillRect(0, 0, @jcanvas.width(), @jcanvas.height())
+    @context.fillRect(0, 0, @canvas_width, @canvas_height)
 
   image: (url) ->
     img = new Image()
     img.src = url
-    @set_dimensions(img.width, img.height)
+    if img.width? and img.width isnt 0 
+      img_width = img.width
+    else
+      img_width = @canvas_width
+    if img.height? and img.height isnt 0
+      img_height = img.height
+    else
+      img_height = @canvas_height
+    @set_dimensions(img_width, img_height)
     img.onload = =>
       @context.drawImage(img,0,0)
 
