@@ -1,0 +1,21 @@
+// gradients
+
+= bg-gradient($top_color, $bottom_color)
+  background-image: -ms-linear-gradient(top, $top_color 0%, $bottom_color 100%)
+  background-image: -moz-linear-gradient(top, $top_color 0%, $bottom_color 100%)
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, $top_color), color-stop(1, $bottom_color))
+  background-image: -webkit-linear-gradient(top, $top_color 0%, $bottom_color 100%)
+  background-image: linear-gradient(top, $top_color 0%, $bottom_color 100%)
+
+// Round cornders
+
+= border-radius($radius:5px)
+  -moz-border-radius: $radius
+  -webkit-border-radius: $radius
+  border-radius: $radius
+ 
+// Shadow
+
+= shadow($horiz_offset:0em, $vert_offset:0.25em, $blur_radius:0.5em, $spread_radius:0.2em, $colour:#888888)
+  -webkit-box-shadow: $horiz_offset $vert_offset $blur_radius $colour
+  -moz-box-shadow: $horiz_offset $vert_offset $blur_radius $spread_radius $colour                

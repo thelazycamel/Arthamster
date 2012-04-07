@@ -3,7 +3,7 @@
 
   Arthamster = (function() {
 
-    function Arthamster(canvas_id) {
+    function Arthamster(canvas_id, width, height) {
       this.canvas_id = canvas_id;
       this.canvas = document.getElementById(canvas_id);
       this.jcanvas = $("#" + canvas_id);
@@ -14,9 +14,20 @@
       this.color = "black";
       this.tool_size = 10;
       this.text = "";
+      this.set_dimensions(width, height);
       this.mouse_events();
       this.set_up_toolkit();
     }
+
+    Arthamster.prototype.set_dimensions = function(width, height) {
+      this.jcanvas.attr("width", "" + width + "px");
+      this.jcanvas.attr("height", "" + height + "px");
+      $("#arthamster").css({
+        "width": "" + (parseInt(width) + 107) + "px"
+      });
+      $("#arthamster input#width").val(width);
+      return $("#arthamster input#height").val(height);
+    };
 
     Arthamster.prototype.mouse_events = function() {
       var _this = this;
@@ -47,12 +58,18 @@
         $("#" + _this.tool).addClass("selected_tool");
         return false;
       });
-      $("#palette").on("click", "a.color", function(e) {
+      $("#arthamster_palette").on("click", "a.color", function(e) {
         _this.color = "#" + e.target.id;
         $("#current_color").css({
           "backgroundColor": _this.color
         });
         return false;
+      });
+      $("#width").change(function() {
+        return _this.set_dimensions($("#width").val(), $("#height").val());
+      });
+      $("#height").change(function() {
+        return _this.set_dimensions($("#width").val(), $("#height").val());
       });
       $("#image").click(function(e) {
         _this.image(e.target.dataset.src);
@@ -133,6 +150,7 @@
         _this = this;
       img = new Image();
       img.src = url;
+      this.set_dimensions(img.width, img.height);
       return img.onload = function() {
         return _this.context.drawImage(img, 0, 0);
       };
@@ -146,7 +164,7 @@
 
     function Palette(colors) {
       this.colors = colors;
-      this.palette = $("#palette #colors");
+      this.palette = $("#arthamster_palette #colors");
       this.build_palette();
     }
 
@@ -173,7 +191,7 @@
   $(function() {
     var my_palette, mycanvas;
     my_palette = new Palette(pallet_web_216);
-    return mycanvas = new Arthamster("example");
+    return mycanvas = new Arthamster("example", 700, 453);
   });
 
 }).call(this);

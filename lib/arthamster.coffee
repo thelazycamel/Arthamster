@@ -3,4 +3,4 @@
 
 $ ->
   my_palette = new Palette(pallet_web_216)
-  mycanvas = new Arthamster("example")
+  mycanvas = new Arthamster("example", 700, 453)

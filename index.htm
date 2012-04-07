@@ -7,29 +7,38 @@
     <script type="text/javascript" src="scripts/arthamster.js"></script>
   </head>
   <body>
-    <div id="arthamster">
-      <h1>Arthamster HTML 5 Canvas</h1>
-      <div id="toolbox">
+    <section id="arthamster">
+      <div id="arthamster_topbar">
+        <h1>Arthamster HTML 5 Canvas</h1>
+        <a id="clear" href="#" class="button">Clear</a>
+        <a id="undo" href="#" class="button">Undo</a>
+
+      </div>
+      <div id="arthamster_toolbox">
         <a id="pencil" href="#" class="tool"></a>
         <a id="circle" href="#" class="tool"></a>
         <a id="square" href="#" class="tool"></a>
         <a id="text" href="#" class="tool"></a>
       </div>
-      <div id="palette">
+      <canvas id="example"></canvas>
+      <div id="arthamster_palette">
         <h3>Color:<span id="current_color"></span></h3>
         <div id="colors">
         </div>
       </div>
-      <canvas id="example" width="700px" height="453px"></canvas>
-      <label>Text: </label><input type="text" id="text_value"/> 
-      <input type="range" min="1" max="100" id="tool_size" value="10"/>
-      <a href="#" data-src="images/mountains.jpg" id="image" class="button">Mountain Background</a>
-      <a id="clear" href="#" class="button">Clear</a>
-      <a id="undo" href="#" class="button">Undo</a>
-      <select id="pallet_changer">
-        <option value="pallet_web_216">Web 216</option>
-        <option value="pallet_grey_scale">Grey Scale</option>
-      </select>
-    </div>
+      <div id="arthamster_footer">
+        <label>Text: </label><input type="text" id="text_value"/> 
+        <input type="range" min="1" max="100" id="tool_size" value="10"/>
+        <a href="#" data-src="images/mountains.jpg" id="image" class="button">Mountain Background</a>
+        <label>w:</label>
+        <input type="text" id="width" class="dimension"/>
+        <label>h:</label>
+        <input type="text" id="height" class="dimension"/>
+        <select id="pallet_changer">
+          <option value="pallet_web_216">Web 216</option>
+          <option value="pallet_grey_scale">Grey Scale</option>
+        </select>
+      </div>
+    </section>
   </body>
 </html>

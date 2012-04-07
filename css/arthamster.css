@@ -1,115 +1,150 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+ * v2.0 | 20110126
+ * License: none (public domain) */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
 body {
-  background-color: #eeeeee;
-}
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
 
 #arthamster {
-  width: 807px;
-  background-color: #cccccc;
   font: normal 12px helvetica, arial, sans-serif;
-}
+  border: 2px solid black;
+  background-color: #dddddd;
+  min-width: 800px;
+  margin: 10px; }
+  #arthamster #example {
+    float: left;
+    background-color: white;
+    border: 1px solid black;
+    margin: 0px; }
+  #arthamster .button {
+    text-decoration: none;
+    color: #aaaaaa;
+    background-color: white;
+    border: 1px solid #aaaaaa;
+    padding: 2px 5px;
+    margin-left: 3px; }
 
-#arthamster h1 {
-  background-color: #cccccc;
-  color: ffffff;
+#arthamster_topbar {
+  height: 20px;
   padding: 5px;
-  margin: 0px;
-  font: bold 13px helvetica, arial, sans-serif;
-}
+  background-image: -ms-linear-gradient(top, #aaaaaa 0%, #dddddd 100%);
+  background-image: -moz-linear-gradient(top, #aaaaaa 0%, #dddddd 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaaaaa), color-stop(1, #dddddd));
+  background-image: -webkit-linear-gradient(top, #aaaaaa 0%, #dddddd 100%);
+  background-image: linear-gradient(top, #aaaaaa 0%, #dddddd 100%);
+  color: white; }
+  #arthamster_topbar h1 {
+    font: bold 14px helvetica, arial, sans-serif;
+    display: inline; }
+  #arthamster_topbar .button {
+    float: right; }
 
-#example{
-  background-color: #ffffff;
-  border: 1px solid black;
-  margin: 0px;
-}
+#arthamster_toolbox {
+  float: left;
+  width: 25px;
+  padding: 0px 2px;
+  background-color: #cccccc; }
+  #arthamster_toolbox .tool {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-image: url("../images/icons.png"); }
+  #arthamster_toolbox #pencil {
+    background-position: -10px 0px; }
+  #arthamster_toolbox #pencil.selected_tool {
+    background-position: -50px 0px; }
+  #arthamster_toolbox #square {
+    background-position: -10px -50px; }
+  #arthamster_toolbox #square.selected_tool {
+    background-position: -50px -50px; }
+  #arthamster_toolbox #circle {
+    background-position: -10px -100px; }
+  #arthamster_toolbox #circle.selected_tool {
+    background-position: -50px -100px; }
+  #arthamster_toolbox #text {
+    background-position: -10px -150px; }
+  #arthamster_toolbox #text.selected_tool {
+    background-position: -50px -150px; }
 
-#palette{
-  float: right;
+#arthamster_palette {
+  float: left;
   width: 72px;
-  padding: 0px 2px;
-}
+  padding: 0px 2px; }
+  #arthamster_palette h3 {
+    position: relative;
+    background-color: #cccccc;
+    padding: 5px;
+    margin: 0px;
+    font: normal 12px helvetica, arial, sans-serif; }
+  #arthamster_palette #current_color {
+    display: block;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 11px;
+    height: 11px;
+    border: 1px solid black;
+    background-color: black; }
+  #arthamster_palette a {
+    text-decoration: none;
+    display: inline-block;
+    float: left;
+    margin-left: 2px;
+    margin-bottom: 2px;
+    width: 10px;
+    height: 10px; }
 
-#palette h3 {
-  position: relative;
-  background-color: #cccccc;
-  padding: 5px;
-  margin :0px;
-  font: normal 12px helvetica, arial, sans-serif;
-}
-
-#current_color {
-  display: block;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  width: 11px;
-  height: 11px;
-  border: 1px solid #000000;
-  background-color: #000000;
-}
-
-#palette a{
-  text-decoration: none;
-  display: inline-block;
-  float: left;
-  margin-left: 2px;
-  margin-bottom: 2px;
-  width: 10px;
-  height: 10px;
-}
-
-#arthamster .button {
-  text-decoration: none;
-  color: #aaaaaa;
-  background-color: #ffffff;
-  border: 1px solid #aaaaaa;
-  padding: 2px 5px;
-  margin-left: 3px;
-}
-
-#toolbox{
-  float: left;
-  width: 25px;
-  padding: 0px 2px;
-}
-
-#toolbox .tool {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  background-image: url("../images/icons.png");
-}
-
-#pencil {
-  background-position: -10px 0px;
-}
-
-#pencil.selected_tool {
-  background-position: -50px 0px;
-}
-
-#square {
-  background-position: -10px -50px;
-}
-
-#square.selected_tool {
-  background-position: -50px -50px;
-}
-
-#circle {
-  background-position: -10px -100px;
-}
-
-#circle.selected_tool {
-  background-position: -50px -100px;
-}
-
-#text {
-  background-position: -10px -150px;
-}
-
-#text.selected_tool {
-  background-position: -50px -150px;
-}
-
-
-
+#arthamster_footer {
+  clear: both;
+  height: 30px;
+  background-image: -ms-linear-gradient(top, #aaaaaa 0%, #dddddd 100%);
+  background-image: -moz-linear-gradient(top, #aaaaaa 0%, #dddddd 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaaaaa), color-stop(1, #dddddd));
+  background-image: -webkit-linear-gradient(top, #aaaaaa 0%, #dddddd 100%);
+  background-image: linear-gradient(top, #aaaaaa 0%, #dddddd 100%);
+  color: white; }
+  #arthamster_footer .dimension {
+    width: 70px; }
+  #arthamster_footer #pallet_changer {
+    margin-right: 5px;
+    margin-top: 5px;
+    float: right; }

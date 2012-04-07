@@ -1,6 +1,6 @@
 
 class Arthamster
-  constructor: (canvas_id) ->
+  constructor: (canvas_id, width, height) ->
     @canvas_id = canvas_id
     @canvas = document.getElementById(canvas_id)
     @jcanvas = $("##{canvas_id}")
@@ -11,8 +11,17 @@ class Arthamster
     @color = "black"
     @tool_size = 10
     @text = ""
+    @set_dimensions(width, height)
     @mouse_events()
     @set_up_toolkit()
+
+  set_dimensions: (width, height) ->
+    @jcanvas.attr("width", "#{width}px")
+    @jcanvas.attr("height","#{height}px")
+    $("#arthamster").css({"width": "#{parseInt(width) + 107}px"})
+    $("#arthamster input#width").val(width)
+    $("#arthamster input#height").val(height)
+
 
   mouse_events: ->
     @jcanvas.mousedown (e) => 
@@ -36,10 +45,14 @@ class Arthamster
       $(".tool").removeClass("selected_tool")
       $("##{@tool}").addClass("selected_tool")
       return false
-    $("#palette").on "click", "a.color", (e) =>
+    $("#arthamster_palette").on "click", "a.color", (e) =>
       @color = "##{e.target.id}"
       $("#current_color").css({"backgroundColor": @color})
       return false
+    $("#width").change =>
+      @set_dimensions($("#width").val(), $("#height").val())
+    $("#height").change =>
+      @set_dimensions($("#width").val(), $("#height").val())
     $("#image").click (e) =>
       @image(e.target.dataset.src)
       return false
@@ -101,6 +114,7 @@ class Arthamster
   image: (url) ->
     img = new Image()
     img.src = url
+    @set_dimensions(img.width, img.height)
     img.onload = =>
       @context.drawImage(img,0,0)
 

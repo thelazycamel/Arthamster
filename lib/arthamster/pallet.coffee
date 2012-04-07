@@ -1,7 +1,7 @@
 class Palette
   constructor: (colors) ->
     @colors = colors
-    @palette = $("#palette #colors")
+    @palette = $("#arthamster_palette #colors")
     @build_palette()
 
   build_palette: ->
