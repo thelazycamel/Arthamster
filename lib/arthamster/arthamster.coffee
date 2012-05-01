@@ -1,5 +1,5 @@
 
-class Arthamster
+class window.Arthamster
   constructor: (canvas_id, width, height) ->
     @canvas_id = canvas_id
     @canvas = document.getElementById(canvas_id)
@@ -46,7 +46,7 @@ class Arthamster
       $(".tool").removeClass("selected_tool")
       $("##{@tool}").addClass("selected_tool")
       return false
-    $("#arthamster_palette").on "click", "a.color", (e) =>
+    $("#arthamster_pallet").on "click", "a.color", (e) =>
       @color = "##{e.target.id}"
       $("#current_color").css({"backgroundColor": @color})
       return false
@@ -54,11 +54,10 @@ class Arthamster
       @set_dimensions($("#width").val(), $("#height").val())
     $("#height").change =>
       @set_dimensions($("#width").val(), $("#height").val())
-    $("#image").click (e) =>
-      @image(e.target.dataset.src)
-      return false
+    $("#image").change (e) =>
+      @image_uploader(e)
     $("#pallet_changer").change (e) =>
-      new_palette = new Palette(eval(e.target.value))
+      new_pallet = new Pallet(eval(e.target.value))
     $("#clear").click =>
       @clear()
       return false
@@ -112,19 +111,40 @@ class Arthamster
     @context.fillStyle = "#ffffff"
     @context.fillRect(0, 0, @canvas_width, @canvas_height)
 
+  image_uploader: (e) ->
+    file = e.target.files[0]
+    if file.type.indexOf("image") != -1
+      $("#temp_image").remove()
+      img = document.createElement("img");
+      img.id = "temp_image"
+      reader = new FileReader()
+      reader.onload = (evt) => 
+        img.src = evt.target.result
+        @image(reader.result)
+      reader.readAsDataURL(file)
+      console.log(reader)
+    else
+      alert("Images Only")
+
   image: (url) ->
     img = new Image()
     img.src = url
-    if img.width? and img.width isnt 0 
-      img_width = img.width
-    else
-      img_width = @canvas_width
-    if img.height? and img.height isnt 0
-      img_height = img.height
-    else
-      img_height = @canvas_height
-    @set_dimensions(img_width, img_height)
+    ratio = 1
+    canvasCopy = document.createElement("canvas");
+    copyContext = canvasCopy.getContext("2d");
+    maxWidth = 800
+    maxHeight = 600
     img.onload = =>
-      @context.drawImage(img,0,0)
+      if img.width > maxWidth
+        ratio = maxWidth / img.width
+        if (img.height * ratio) > maxHeight
+          ratio = maxHeight / img.height
+      else if img.height > maxHeight
+        ratio = maxHeight / img.height
+      canvasCopy.width = img.width;
+      canvasCopy.height = img.height;
+      copyContext.drawImage(img,0,0)
+      @set_dimensions(img.width * ratio, img.height * ratio)
+      @context.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, @canvas.width, @canvas.height)
 
       

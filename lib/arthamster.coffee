@@ -2,5 +2,5 @@
 #coffee --join scripts/arthamster.js -cw lib/
 
 $ ->
-  my_palette = new Palette(pallet_web_216)
+  my_pallet = new Pallet(pallet_web_216)
   mycanvas = new Arthamster("example", 700, 453)

@@ -1,10 +1,10 @@
-class Palette
+class Pallet
   constructor: (colors) ->
     @colors = colors
-    @palette = $("#arthamster_palette #colors")
-    @build_palette()
+    @pallet = $("#arthamster_pallet #colors")
+    @build_pallet()
 
-  build_palette: ->
-    @palette.html("")
+  build_pallet: ->
+    @pallet.html("")
     for color in @colors
-      @palette.append("<a href='#' id='#{color}' style='background-color: ##{color}' class='color'></a>")
+      @pallet.append("<a href='#' id='#{color}' style='background-color: ##{color}' class='color'></a>")
